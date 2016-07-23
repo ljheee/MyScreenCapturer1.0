@@ -35,8 +35,12 @@ public class SnippingFrame extends JFrame {
 		g.drawImage(tempImage, 0, 0, this);
 	}
 	
+	public static SnippingFrame getSnippingFrame(JFrame jf){
+		return new SnippingFrame(jf);
+	}
 	
-	public SnippingFrame(JFrame jf) {
+	
+	private SnippingFrame(JFrame jf) {
 
 		snapshot();
 		this.frame = jf;
