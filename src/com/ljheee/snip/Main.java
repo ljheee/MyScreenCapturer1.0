@@ -3,11 +3,14 @@ package com.ljheee.snip;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
+/**
+ * 初始化--小界面
+ * @author ljheee
+ *
+ */
 public class Main {
 
 	JButton newRectCapture, newFullCapture, cancleBtn, aboutBtn;
@@ -69,9 +72,16 @@ public class Main {
 		jf.setVisible(true);
 
 	}
-
+	
+	/**
+	 * 内部类
+	 * 监听处理--“初始化小界面”按钮功能
+	 * @author ljheee
+	 *
+	 */
 	class UIListener implements ActionListener {
-
+		
+		RectCaptureFrame rectCapture = null;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
@@ -81,7 +91,7 @@ public class Main {
 			if (e.getSource() == newRectCapture) {
 				jf.setVisible(false);
 				cancleBtn.setEnabled(true);
-				SnippingFrame.getSnippingFrame(jf);
+				rectCapture = RectCaptureFrame.getSnippingFrame(jf);
 			}
 			if (e.getSource() == newFullCapture) {
 				jf.setVisible(false);
@@ -89,12 +99,14 @@ public class Main {
 				//
 			}
 			if (e.getSource() == cancleBtn) {
-				
+				rectCapture.desory();
 			}
 
 		}
 	}
 
+	
+	
 	public static void main(String[] args) {
 		new Main();
 	}
