@@ -27,7 +27,6 @@ public class RectCaptureFrame extends JFrame {
 
 	private static RectCaptureFrame thisInstance = null;
 
-	JFrame originalFrame = null;
 	int orgx = 0, orgy = 0, endx = 0, endy = 0;
 	Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 	BufferedImage fullScreenImage = null;// 当前屏幕--全景图
@@ -67,20 +66,22 @@ public class RectCaptureFrame extends JFrame {
 	private RectCaptureFrame(JFrame jf) {
 
 		snapshot();//截取当前屏幕的满屏图片
-		this.originalFrame = jf;
 		this.setSize(d);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setUndecorated(true);
+		
 		
 		this.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				originalFrame.setVisible(true);
-				new SaveCaptureFrame(p0, width, height);
+				new SaveCaptureFrame(p0, width, height,saveImage);
 				thisInstance.desory();
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
+				jf.setVisible(false);
+				jf.dispose();
 				orgx = e.getX();
 				orgy = e.getY();
 				p0 = new Point(orgx, orgy);
@@ -88,6 +89,7 @@ public class RectCaptureFrame extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent arg0) {
+				RectCaptureFrame.this.setCursor(CROSSHAIR_CURSOR);//十字型鼠标
 			}
 
 			@Override
