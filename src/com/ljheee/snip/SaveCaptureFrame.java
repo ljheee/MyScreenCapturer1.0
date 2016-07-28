@@ -42,7 +42,11 @@ public class SaveCaptureFrame extends JFrame{
 		bImage = saveImage;
 		
 		//设置文件过滤
-		fileChooser.setFileFilter(new FileNameExtensionFilter("Pictute", new String[]{"png","jpeg","gif","bmp"}));
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.setFileFilter(new FileNameExtensionFilter("GIF文件 (*.gif)",".gif"));
+		fileChooser.setFileFilter(new FileNameExtensionFilter("JPEG文件 (*.jpg;*.jpeg)",".jpg",".jpeg"));
+		fileChooser.setFileFilter(new FileNameExtensionFilter("BMP文件 (*.bmp)",".bmp"));
+		
 		
 		JRootPane rootPane = new JRootPane(); //此panel，添加菜单
 		rootPane.setBackground(Color.gray);

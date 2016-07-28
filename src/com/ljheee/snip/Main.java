@@ -114,6 +114,7 @@ public class Main {
 			}
 			if (e.getSource() == cancleBtn) {
 				rectCapture.desory();
+				cancleBtn.setEnabled(false);
 			}
 
 		}

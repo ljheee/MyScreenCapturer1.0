@@ -27,7 +27,7 @@ public class RectCaptureFrame extends JFrame {
 
 	private static RectCaptureFrame thisInstance = null;
 
-	int orgx = 0, orgy = 0, endx = 0, endy = 0;
+	int orgx = 0, orgy = 0, endx = 0, endy = 0,mouseXNow = 0,mouseYNow = 0;
 	Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 	BufferedImage fullScreenImage = null;// µ±Ç°ÆÁÄ»--È«¾°Í¼
 	BufferedImage tempImage = null;//
@@ -109,6 +109,8 @@ public class RectCaptureFrame extends JFrame {
 			public void mouseDragged(MouseEvent e) {
 				endx = e.getX();
 				endy = e.getY();
+				mouseXNow = e.getXOnScreen();
+				mouseYNow = e.getYOnScreen();
 				g = RectCaptureFrame.this.getGraphics();
 				g.drawImage(tempImage, 0, 0, RectCaptureFrame.this);
 				int x = Math.min(orgx, endx);
@@ -124,6 +126,11 @@ public class RectCaptureFrame extends JFrame {
 
 				saveImage = fullScreenImage.getSubimage(x, y, width, height);
 				g.drawImage(saveImage, x, y, RectCaptureFrame.this);
+				String sizeTip = Math.abs(orgx-mouseXNow)+"x"+Math.abs(orgy-mouseYNow);
+				g.setColor(Color.BLACK);
+				g.fillRect((orgx>mouseXNow?mouseXNow:orgx), (orgy>mouseYNow?mouseYNow:orgy)-20, sizeTip.length()*7, 18);
+				g.setColor(Color.WHITE);
+				g.drawString(sizeTip, (orgx>mouseXNow?mouseXNow:orgx), (orgy>mouseYNow?mouseYNow:orgy)-7);
 //				new SaveCaptureFrame(p0, width, height);
 			}
 		});
