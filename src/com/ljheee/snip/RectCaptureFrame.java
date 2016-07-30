@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Robot;
@@ -64,12 +65,14 @@ public class RectCaptureFrame extends JFrame {
 	 * @param jf
 	 */
 	private RectCaptureFrame(JFrame jf) {
-
+		
 		snapshot();//截取当前屏幕的满屏图片
 		this.setSize(d);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setUndecorated(true);
 		
+		Image icon = Toolkit.getDefaultToolkit().getImage("/logo.png");
+		this.setIconImage(icon);
 		
 		this.addMouseListener(new MouseListener() {
 			@Override
@@ -160,7 +163,7 @@ public class RectCaptureFrame extends JFrame {
 	public void snapshot() {
 		try {
 			Robot robot = new Robot();
-
+			
 			// 创建包含从屏幕中读取的像素的图像。
 			fullScreenImage = robot.createScreenCapture(new Rectangle(0, 0, d.width, d.height));
 		} catch (AWTException e) {

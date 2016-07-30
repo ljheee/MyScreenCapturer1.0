@@ -1,8 +1,14 @@
 package com.ljheee.snip;
 
-import java.awt.Insets;
+import java.awt.AWTException;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -23,6 +29,8 @@ public class Main {
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setSize(280, 110);
 		jf.setResizable(false);
+		Image icon = Toolkit.getDefaultToolkit().getImage("/logo.png");
+		jf.setIconImage(icon);
 		
 		newRectCapture = new JButton("\u77E9\u5F62\u622A\u56FE");
 
@@ -31,9 +39,9 @@ public class Main {
 		cancleBtn = new JButton("\u53D6\u6D88");
 		cancleBtn.setEnabled(false);
 		
-		aboutBtn = new JButton(new ImageIcon("Images/about.png"));//35*35
-		aboutBtn.setMargin(new Insets(75, 245, 0, 0));
-//		aboutBtn.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("/Images/about.png")));
+		aboutBtn = new JButton();//about.png==35*35px
+//		aboutBtn.setMargin(new Insets(75, 245, 0, 0));
+		aboutBtn.setIcon(new ImageIcon(Main.class.getResource("/about.png")));
 		aboutBtn.setToolTipText("\u5173\u4E8E");
 		
 		newRectCapture.addActionListener(handler);
@@ -100,18 +108,28 @@ public class Main {
 			if (e.getSource() == aboutBtn) {
 				JOptionPane.showMessageDialog(null, "Author:ljheee \nQQ554278334 \n2016-7-23");
 			}
+			
 			if (e.getSource() == newRectCapture) {
 				jf.setVisible(false);//先设置为不可见
 				cancleBtn.setEnabled(true);
 				rectCapture = RectCaptureFrame.getSnippingFrame(jf);
 				jf.setVisible(true);//再设为可见，“小界面”会显示在上面
 			}
+			
 			if (e.getSource() == newFullCapture) {
 				jf.setVisible(false);
-				cancleBtn.setEnabled(true);
-				//Todo add
-				
+				jf.dispose();
+				BufferedImage image = null;
+				Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+				try {
+					Robot robot = new Robot();
+					image = robot.createScreenCapture(new Rectangle(0, 0, d.width, d.height));
+				} catch (AWTException e1) {
+					e1.printStackTrace();
+				}
+				new FullCaptureFrame(image);
 			}
+			
 			if (e.getSource() == cancleBtn) {
 				rectCapture.desory();
 				cancleBtn.setEnabled(false);

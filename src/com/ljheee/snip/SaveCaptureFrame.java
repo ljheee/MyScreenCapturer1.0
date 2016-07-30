@@ -3,7 +3,9 @@ package com.ljheee.snip;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -40,6 +42,9 @@ public class SaveCaptureFrame extends JFrame{
 		this.setLocation(p0);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		bImage = saveImage;
+		
+		Image icon = Toolkit.getDefaultToolkit().getImage("/logo.png");
+		this.setIconImage(icon);
 		
 		//设置文件过滤
 		fileChooser.setAcceptAllFileFilterUsed(false);
@@ -94,6 +99,11 @@ public class SaveCaptureFrame extends JFrame{
 		g.drawImage(bImage,50 , 80, this);
 	}
 	
+	/**
+	 * 菜单栏--菜单项事件监听处理
+	 * @author ljheee
+	 *
+	 */
 	class ItemListener implements ActionListener{
 
 		
@@ -138,7 +148,6 @@ public class SaveCaptureFrame extends JFrame{
 			}
 			
 		}
-		
 	}
 	
 	//test
