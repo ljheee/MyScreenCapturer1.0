@@ -84,7 +84,7 @@ public class About extends JDialog
 		TextPan1.setBounds(185,100,310,25);
 		TextPan1.setText("JAVA语言实现的截图工具");
 		TextPan2.setBounds(185,120,310,110);
-		TextPan2.setText("版本号：V1.0  \n作  者：研发总监:ljheee\n              分析设计:ljheee\n              程序编写:ljheee\n日  期：2016年7月23日\nEMAIL ：jianhua4lee@gmail.com\n公  司：ljheee科技有限公司");//(Tarena IT Training Group)
+		TextPan2.setText("版本号：V1.0  \n作  者：分析设计:ljheee\n              程序编写:ljheee\n日  期：2016年7月23日\nBlog：my.csdb.net/ljheee\nEMAIL ：jianhua4lee@gmail.com\n公  司：ljheee科技有限公司");//(Tarena IT Training Group)
 
 
 		t.start();
